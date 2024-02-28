@@ -2,19 +2,22 @@ import './App.css';
 import { Reset } from 'styled-reset';
 import { Route, Routes } from 'react-router-dom';
 import SideBar from './components/SideBar/SideBar';
+import DownBar from './components/DownBar/DownBar';
+import RootLayout from './components/RootLayout/RootLayout';
+import Mypage from './pages/Mypage/Mypage';
+import { MENUS } from './constants/menu';
 
 function App() {
   return (
    <>
     <Reset />
-    <SideBar />
-    <Routes>
-
-      <Route path='/mypage' element={<>마이페이지</>}/>
-      <Route path='/board' element={<>게시판</>}/>
-      <Route path='/notice' element={<>공지사항</>}/>
-
-    </Routes>
+    <SideBar/>
+    <DownBar/>
+    <RootLayout>
+      <Routes>
+        {MENUS.map(menu => <Route key={menu.id} path={menu.path} element={menu.element} />)}
+      </Routes>
+    </RootLayout>
    </>
   );
 }

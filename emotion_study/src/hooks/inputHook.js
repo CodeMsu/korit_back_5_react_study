@@ -1,0 +1,29 @@
+import { useState } from "react";
+
+export function useInput() {
+    const [ inputValue, setInputValue ] = useState(""); // use로 시작하면 react 훅임.
+
+    const onChange = (e) => {
+        const { value } = e.target;
+            setInputValue(() => value);
+    }
+    return [ inputValue, onChange ];
+} 
+
+/**
+ * 
+ * @param {*} maxSize 
+ * @returns 
+ */
+export function useMaxSizeValidateInput(maxSize) {
+    const [ inputValue, setInputValue ] = useState(""); // use로 시작하면 react 훅임.
+
+    const onChange = (e) => {
+        const { value } = e.target;
+        if(value.length <= maxSize) {
+            setInputValue(() => value);
+        }
+    }
+
+    return [ inputValue, onChange ];
+} 

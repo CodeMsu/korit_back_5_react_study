@@ -1,10 +1,14 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-function AppTest(props) {
+function AppTest() {
     return (
-        <div>
-            
-        </div>
+       <>
+        <Reset />
+        <Routes>
+            <Route></Route>
+        </Routes>
+       </>
     );
 }
 
