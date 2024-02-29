@@ -5,7 +5,7 @@ import { QUILL_MODULES } from "../../constants/quillModules";
 import { useMaxSizeValidateInput } from "../../hooks/inputHook";
 import { useQuillInput } from "../../hooks/quillHook";
 import { useNavigate } from "react-router-dom";
-import { useLoadList } from "../../hooks/boardListHook";
+
 
 const layout = css`
     display: flex;
@@ -51,23 +51,26 @@ const submitButton = css`
 
 function BoardWrite() {
     const navigate = useNavigate();
-    const [ inputValue, handleInputChange ] = useMaxSizeValidateInput(10);
+    const [ inputValue, handleInputChange ] = useMaxSizeValidateInput(20);
     const [ quillValue, handleQuillValueChange ] = useQuillInput();
-    const { boardList, lastId } = useLoadList();
+
 
     const handleSubmitClick = () => {
-        const board = {
-            boardId: lastId +1,
-            boardTitle: inputValue,
-            boardContent: quillValue
-        };
+        let newBoardList = [];
 
-        const newBoardList = [...boardList,board];
+        for(let i = 0; i < 203; i++) {
+            const board = {
+                boardId: i + 1,
+                boardTitle: inputValue + (i + 1),
+                boardContent: quillValue
+                };
+
+               newBoardList = [...newBoardList,board];
+            }
         localStorage.setItem("boardList", JSON.stringify(newBoardList));
         alert("글 작성 완료.")
         navigate("/board/list");
-    }
-
+}
 
     return (
         <div css = {layout}>
